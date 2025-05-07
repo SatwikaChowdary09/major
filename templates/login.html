@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>UPI FRAUD DETECTION python</title>
+
+  <!-- Icons & Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Poppins" rel="stylesheet" />
+
+  <!-- Vendor CSS -->
+  <link href="../static/vendor/aos/aos.css" rel="stylesheet" />
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+  <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+  <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+  <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+  <!-- Main CSS -->
+  <link href="../static/css/style.css" rel="stylesheet" />
+
+  <style>
+    .dark-mode {
+      background-color: #1a1a1a;
+      color: white;
+    }
+
+    .dark-mode #header {
+      background-color: #2d2d2d !important;
+    }
+
+    .dark-mode .entry-btn-outline {
+      border-color: #00FFC6;
+      color: #00FFC6;
+    }
+
+    .dark-mode .entry-btn-outline:hover {
+      background-color: #00FFC6;
+      color: #1a1a1a;
+    }
+
+    #clock {
+      color: #007bff;
+      font-weight: bold;
+      margin-right: 20px;
+      font-size: 1.2rem;
+    }
+
+    .dark-mode #clock {
+      color: #00FFC6;
+    }
+
+    .dark-toggle {
+      background: none;
+      border: none;
+      color: #007bff;
+      font-size: 1.5rem;
+      margin-right: 15px;
+      cursor: pointer;
+      padding: 5px;
+    }
+
+    .dark-mode .dark-toggle {
+      color: #00FFC6;
+    }
+
+    .entry-btn-outline {
+      background: transparent;
+      color: #007bff;
+      border: 2px solid #007bff;
+      padding: 8px 20px;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      text-decoration: none;
+    }
+
+    .entry-btn-outline:hover {
+      background-color: #007bff;
+      color: white;
+      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    }
+
+    #navbar ul {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <header id="header" class="fixed-top d-flex align-items-center" style="background-color: #b8f1f1;">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+      <h1 style="font-weight: bold; margin: 0;">
+        <a href="index.html" style="color: #007bff; text-decoration: none;">
+          <span>UPI Fraud Detection</span>
+        </a>
+      </h1>
+
+      <div class="d-flex align-items-center">
+        <div id="clock"></div>
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li>
+              <button class="dark-toggle" id="darkModeToggle">
+                <i class="bi bi-moon-fill"></i>
+              </button>
+            </li>
+            <li><a class="entry-btn-outline" href="{{ url_for('first') }}">Home</a></li>
+            <li><a class="entry-btn-outline" href="{{ url_for('login') }}">Login</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="zoom-in" data-aos-delay="100">
+      <div class="row align-items-center">
+        <div class="col-lg-6 text-center text-lg-start mb-4 mb-lg-0">
+          <h1 class="text-white display-4 fw-bold mb-3">
+            <span style="color: #00FFC6;">UPI Fraud Detection</span><br />
+            <span>Using Machine Learning Approaches</span>
+          </h1>
+          <p class="text-light fs-5 mb-4">
+            Safeguarding digital transactions with intelligent AI-powered solutions.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <section id="book-a-table" class="book-a-table">
+      <div class="container" data-aos="fade-up">
+        <div class="login-container">
+          <div class="login-header">
+            <h2>
+              <i class="fas fa-sign-in-alt"></i> Login
+            </h2>
+          </div>
+          <div class="form-container">
+            <div class="control-group">
+              <label for="username">Username</label>
+              <input type="text" id="uname" name="uname" placeholder="Enter username">
+            </div>
+            <div class="control-group">
+              <label for="password">Password</label>
+              <div style="position: relative;">
+                <input type="password" id="pwd" name="pwd" placeholder="Enter password" style="padding-right: 40px;">
+                <i class="fa-solid fa-eye" id="togglePassword" onclick="togglePasswordVisibility()" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); cursor: pointer;"></i>
+              </div>
+            </div>
+            <div class="user-entry-btn-container">
+              <button class="entry-btn-outline" onclick="login()">
+                <i class="fas fa-sign-in-alt"></i> Sign In
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="customAlert" style="display:none; position:fixed; top:15%; left:50%; transform:translate(-50%, -50%);
+      background-color: #0df1f5; color: #000; padding: 20px 30px; border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.2); z-index:1000; font-family: 'Poppins', sans-serif; font-size: 18px; text-align: center;">
+      <span id="alertMessage">Alert Message</span><br><br>
+      <button onclick="hideCustomAlert()" style="padding: 6px 20px; font-weight: bold; border: none; border-radius: 8px; background-color: #007bff; color: white; cursor: pointer;">OK</button>
+    </div>
+
+    <audio id="successSound">
+      <source src="https://www.soundjay.com/buttons/sounds/button-4.mp3" type="audio/mp3">
+    </audio>
+    <audio id="errorSound">
+      <source src="https://www.soundjay.com/buttons/sounds/button-10.mp3" type="audio/mp3">
+    </audio>
+  </section>
+
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright"></div>
+      <div class="credits"></div>
+    </div>
+  </footer>
+
+  <a href="#" class="scroll-to-top" style="position: fixed; bottom: 20px; right: 20px; font-size: 24px;
+    background: linear-gradient(135deg, #00ffff, #00c6ff); color: white; padding: 10px 15px; border-radius: 50%;
+    text-decoration: none; display: none; z-index: 999; transition: all 0.3s ease;">↑</a>
+
+  <!-- Vendor JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1000, once: true });
+
+    function updateClock() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString();
+      document.getElementById('clock').textContent = timeString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+    const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+    if (isDarkMode) {
+      body.classList.add('dark-mode');
+      darkModeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkMode', 'enabled');
+        darkModeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+      } else {
+        localStorage.setItem('darkMode', 'disabled');
+        darkModeToggle.innerHTML = '<i class="bi bi-moon-fill"></i>';
+      }
+    });
+
+    window.addEventListener("scroll", function () {
+      const scrollBtn = document.querySelector('.scroll-to-top');
+      scrollBtn.style.display = window.scrollY > 300 ? "flex" : "none";
+    });
+
+    document.querySelector('.scroll-to-top').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    function togglePasswordVisibility() {
+      const pwdInput = document.getElementById("pwd");
+      const toggleIcon = document.getElementById("togglePassword");
+
+      if (pwdInput.type === "password") {
+        pwdInput.type = "text";
+        toggleIcon.classList.remove("fa-eye-slash");
+        toggleIcon.classList.add("fa-eye");
+      } else {
+        pwdInput.type = "password";
+        toggleIcon.classList.remove("fa-eye");
+        toggleIcon.classList.add("fa-eye-slash");
+      }
+    }
+    
+
+    function showCustomAlert(message, isSuccess = true) {
+      const alertBox = document.getElementById("customAlert");
+      const messageSpan = document.getElementById("alertMessage");
+      alertBox.style.backgroundColor = isSuccess ? "#0df1f5" : "#ff4d4d";
+      messageSpan.textContent = message;
+      alertBox.style.display = "block";
+
+      const sound = isSuccess ? successSound : errorSound;
+      sound.play();
+
+      if (isSuccess) {
+        alertBox.setAttribute("data-success", "true");
+      } else {
+        alertBox.setAttribute("data-success", "false");
+      }
+    }
+
+    function hideCustomAlert() {
+      const alertBox = document.getElementById("customAlert");
+      alertBox.style.display = "none";
+      if (alertBox.getAttribute("data-success") === "true") {
+        window.location.href = "{{ url_for('upload') }}";
+      }
+    }
+
+    function login() {
+      const uname = document.getElementById("uname").value;
+      const pwd = document.getElementById("pwd").value;
+
+      if (uname === "admin" && pwd === "admin") {
+        showCustomAlert("Login Success!", true);
+      } else {
+        showCustomAlert("Invalid Credentials!", false);
+      }
+    }
+  </script>
+
+  <!-- Vendor Scripts -->
+  <script src="../static/vendor/aos/aos.js"></script>
+  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../static/vendor/php-email-form/validate.js"></script>
+  <script src="../static/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../static/js/main.js"></script>
+</body>
+</html>

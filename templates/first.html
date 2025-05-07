@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UNIFIED PAYMENTS INTERFACE : DIGITAL TRANSACTIONS</title>
+
+  <!-- Icons & Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+    :root {
+      --primary-color: #00c6ff;
+      --accent-color: #0072ff;
+      --abstract-bg: #b8f1f1;
+      --hover-glow: 0 0 10px #00ffff, 0 0 20px #00c6ff;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #eaf7f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    #topbar {
+      background-color: var(--abstract-bg);
+      height: 30px;
+      font-size: 12px;
+      display: flex ;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    #header {
+      background: var(--abstract-bg);
+      padding: 10px 40px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      position: fixed;
+      top: 30px;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+    }
+
+    #header h1 a {
+      color: #0072ff;
+      font-size: 26px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .navbar {
+      display: flex;
+      flex: 1;
+      justify-content: center; /* Centered the buttons */
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+      gap: 10px;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+    }
+
+    .navbar button {
+      background: transparent;
+      border: 2px solid var(--accent-color);
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent-color);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .navbar button i {
+      font-size: 15px;
+    }
+
+    .navbar button:hover {
+      background: var(--accent-color);
+      color: white;
+      box-shadow: 0 0 8px rgba(0, 114, 255, 0.6);
+    }
+    
+
+    #hero {
+  height: 100vh;
+  background: linear-gradient(rgba(0, 128, 128, 0.6), rgba(0, 0, 128, 0.6)),
+    url('https://tse3.mm.bing.net/th?id=OIP.VwXIEYyDohILGNjzXEgG6QHaEP&pid=Api&P=0&h=180') center center / cover no-repeat;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+  animation: bgZoomMove 30s ease-in-out infinite;
+}
+
+@keyframes bgZoomMove {
+  0% {
+    background-size: 100%;
+    background-position: center center;
+  }
+  50% {
+    background-size: 110%;
+    background-position: center top;
+  }
+  100% {
+    background-size: 100%;
+    background-position: center center;
+  }
+}
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100vh;
+      z-index: 0;
+    }
+
+    .hero-text {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fade 1s ease-out forwards;
+    }
+
+    @keyframes fade {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .abstract-box {
+      background-color: var(--abstract-bg);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 900px;
+      margin: 50px auto;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    }
+
+    .abstract-box h3 {
+      color: #004a7c;
+      margin-bottom: 15px;
+      font-size: 24px;
+    }
+
+    .abstract-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--hover-glow);
+    }
+
+    #features {
+      background: #d8f4f4;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    #features h2 {
+      color: #0072ff;
+      margin-bottom: 30px;
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    .feature-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 25px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .feature-card {
+      background: var(--abstract-bg);
+      padding: 20px;
+      border-radius: 15px;
+      width: 250px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+      transition: 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--hover-glow);
+    }
+
+    .feature-card i {
+      font-size: 32px;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+    }
+
+    .feature-card h4 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #004a7c;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      color: #333;
+    }
+
+    .user-entry-btn-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .entry-link {
+      text-decoration: none;
+    }
+
+    .entry-btn-outline {
+      background: transparent;
+      color: #007bff;
+      border: 2px solid #007bff;
+      padding: 10px 24px;
+      font-size: 17px;
+      font-weight: 500;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .entry-btn-outline i {
+      margin-right: 8px;
+      font-size: 20px;
+    }
+
+    .entry-btn-outline:hover {
+      background-color: #007bff;
+      color: white;
+      box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+    }
+
+    .entry-btn-outline:active {
+      transform: scale(0.97);
+    }
+
+    @media (max-width: 768px) {
+      #header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 20px;
+      }
+
+      .navbar ul {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+      }
+
+      .navbar ul li {
+        width: 100%;
+      }
+
+      .navbar button {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .feature-grid {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .feature-card {
+        width: 90%;
+      }
+
+      .entry-btn-outline {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    h1 {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    .scroll-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #0072ff;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      text-decoration: none;
+      font-size: 20px;
+      z-index: 999;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="topbar">UPI Fraud Detection System for Secure Transactions</div>
+
+  <header id="header">
+    <h1><a href="#">UNIFIED PAYMENTS INTERFACE : DIGITAL TRANSACTIONS</a></h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="{{ url_for('first') }}"><button><i class="bi bi-house-door"></i> Home</button></a></li>
+        <li><a href="#about"><button><i class="bi bi-lightbulb"></i> Concept</button></a></li>
+        <li><a href="#features"><button><i class="bi bi-stars"></i> Features</button></a></li>
+        <li><a href="{{ url_for('login') }}"><button><i class="bi bi-box-arrow-in-right"></i> Login</button></a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div style="height: 130px;"></div>
+
+  <section id="hero">
+    <div class="hero-text">
+      <h1 data-aos="fade-up" data-aos-delay="100">UPI Fraud Detection Using Machine Learning</h1>
+      <p data-aos="fade-up" data-aos-delay="300">
+        Built to detect. Engineered to protect. A smarter way to safeguard your UPI transactions in real time
+      </p>
+    </div>
+  </section>
+  
+  <section id="about">
+    <div class="abstract-box" data-aos="fade-up">
+      <h3>Abstract</h3>
+      <p>UPI Fraud is becoming more and more popular in financial transactions, at the same time frauds are also increasing. Conventional methods use rule-based expert systems to detect fraud behaviors, neglecting diverse situations, extreme imbalance of positive and negative samples. In this paper, we propose a CNN-based fraud detection framework, to capture the intrinsic patterns of fraud behaviors learned from labeled data. Abundant transaction data is represented by a feature matrix, on which a convolutional neural network is applied to identify a set of latent patterns for each sample. Experiments on real-world massive transactions of a major commercial bank demonstrate its superior performance compared with some state-of-the-art methods.</p>
+    </div>
+  </section>
+
+  <section id="features">
+    <h2>Key Features</h2>
+    <div class="feature-grid">
+      <div class="feature-card" data-aos="zoom-in" data-aos-delay="100">
+        <i class="bi bi-shield-lock"></i>
+        <h4>Real-Time Fraud Detection</h4>
+        <p>Continuously monitors UPI transactions and flags suspicious activity instantly.</p>
+      </div>
+      <div class="feature-card" data-aos="zoom-in" data-aos-delay="200">
+        <i class="bi bi-cpu"></i>
+        <h4>Machine Learning Model</h4>
+        <p>Uses advanced CNN models for high accuracy and adaptive learning.</p>
+      </div>
+      <div class="feature-card" data-aos="zoom-in" data-aos-delay="300">
+        <i class="bi bi-graph-up"></i>
+        <h4>Pattern Analysis</h4>
+        <p>Detects unusual transaction behavior through statistical and deep learning patterns.</p>
+      </div>
+      <div class="feature-card" data-aos="zoom-in" data-aos-delay="400">
+        <i class="bi bi-clock-history"></i>
+        <h4>Historical Data Tracking</h4>
+        <p>Keeps records of transaction history for training and verification.</p>
+      </div>
+    </div>
+
+   
+ <!-- Scroll to Top Button -->
+<a href="#" class="scroll-to-top" style="
+position: fixed;
+bottom: 20px;
+right: 20px;
+font-size: 24px;
+background: linear-gradient(135deg, #00ffff, #00c6ff);
+color: white;
+padding: 10px 15px;
+border-radius: 50%;
+text-decoration: none;
+display: none;
+z-index: 999;
+transition: all 0.3s ease;
+">↑</a>
+
+<!-- AOS Library -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init({
+  duration: 1000,
+  once: true
+});
+
+// Show/Hide Scroll to Top Button
+window.addEventListener("scroll", function () {
+  const scrollBtn = document.querySelector('.scroll-to-top');
+  if (window.scrollY > 300) {
+    scrollBtn.style.display = "flex";
+    scrollBtn.style.alignItems = "center";
+    scrollBtn.style.justifyContent = "center";
+  } else {
+    scrollBtn.style.display = "none";
+  }
+});
+
+// Smooth Scroll to Top
+document.querySelector('.scroll-to-top').addEventListener('click', function (e) {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+
+</body>
+</html>

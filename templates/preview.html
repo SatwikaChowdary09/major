@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>UPI Fraud Detection</title>
+  <link href="../static/img/favicon.png" rel="icon">
+  <link href="../static/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="../static/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="../static/css/style2.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background-color: #a5e4e6;
+      overflow-x: hidden;
+    }
+
+    #header {
+      background-color: #a2efef;
+      padding: 15px 30px;
+      position: relative;
+      z-index: 999;
+    }
+
+    #navbar ul li a {
+      color: #303be0 !important;
+      font-weight: 500;
+    }
+
+    #navbar ul li a:hover {
+      color: #02182b !important;
+    }
+
+    #navbar ul li {
+      margin-left: 20px;
+    }
+
+    #navbar ul li a i {
+      margin-right: 5px;
+    }
+
+    #hero {
+      height: 100vh;
+      background: url('../static/img/hero-bg1.jpg') center center/cover no-repeat;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 120px 50px 0;
+      position: relative;
+      color: rgba(255, 255, 255, 0.025);
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.388);
+      z-index: 1;
+    }
+
+   /* Hero Content Box */
+   .hero-content-box {
+      position: relative;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.13); /* Optional: Background for content box */
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 400px; /* Reduced size of the content box */
+    }
+
+    /* Hero Content */
+    .hero-content {
+      text-align: left;
+      max-width: 100%;
+      padding: 0;
+    }
+
+    /* Text Styling */
+    .hero-title {
+      font-size: 1.6rem; /* Reduced font size */
+      font-weight: 500;
+      color: #00ffff;
+    }
+
+    .hero-subtext {
+      margin-top: 15px;
+      font-size: 1rem;
+      color: #e8ebf2;
+    }
+
+    /* Typewriter Effect */
+    .typewriter-text {
+      display: inline-block;
+      overflow: hidden;
+      border-right: 2px solid #1e3a8a;
+      white-space: nowrap;
+      animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+/* Basic Reset */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
+.icon-container {
+  position: absolute;
+  top: 20px;
+  right: 20px; /* Changed from left to right */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Spacing between icons */
+}
+
+/* Icon item styling */
+.icon-item {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+/* Icon rays effect */
+.icon-rays {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,255,255,0.3) 0%, transparent 70%);
+  animation: pulse 2s infinite;
+  z-index: 0;
+}
+
+/* Icon body styling */
+.icon-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 255, 255, 0.05); /* Lighter background for visibility */
+  border: 2px solid cyan;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+}
+
+/* Icon emoji styling */
+.icon-emoji {
+  font-size: 2.5rem;
+  z-index: 3;
+  color: #fff; /* Make emojis bright and visible */
+}
+
+/* Pulse animation for rays */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+
+    .scroll-btn {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 12px 25px;
+      background: #97f0ee;
+      color: #000;
+      border: none;
+      font-size: 14px;
+      border-radius: 25px;
+      z-index: 2;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .scroll-btn:hover {
+      box-shadow: 0 0 15px #00ffff;
+      transform: translateX(-50%) scale(1.05);
+    }
+
+    .btn-train {
+      background: #0072ff;
+      border: none;
+      color: #fff;
+      padding: 12px 30px;
+      font-size: 16px;
+      border-radius: 8px;
+      margin-top: 30px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-train:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00ffff;
+    }
+
+    .scroll-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      font-size: 24px;
+      background: #00c6ff;
+      color: white;
+      padding: 12px 17px;
+      border-radius: 50%;
+      text-decoration: none;
+      display: none;
+      z-index: 999;
+      transition: all 0.3s ease;
+    }
+
+    .scroll-to-top:hover {
+      transform: scale(1.1);
+    }
+
+    .modal-content {
+    background: #0d0d0d;
+    border: 2px solid #00ffee;
+    box-shadow: 0 0 20px #00ffee, 0 0 40px #00e6e6;
+    border-radius: 1rem;
+    animation: neonPulse 2s infinite;
+  }
+
+  .modal-body h4 {
+    font-family: 'Orbitron', sans-serif;
+    text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffee;
+  }
+
+  .neon-bar {
+    width: 80%;
+    height: 6px;
+    margin: 20px auto 0;
+    background: linear-gradient(90deg, #00fff2, #00b3ff, #0080ff);
+    border-radius: 4px;
+    animation: loadingGlow 1.5s infinite ease-in-out;
+  }
+
+  @keyframes neonPulse {
+    0%, 100% {
+      box-shadow: 0 0 20px #00ffcc, 0 0 40px #00e6e6;
+    }
+    50% {
+      box-shadow: 0 0 35px #00ffaa, 0 0 60px #0ff;
+    }
+  }
+
+  @keyframes loadingGlow {
+    0%, 100% {
+      background-position: 0%;
+    }
+    50% {
+      background-position: 100%;
+    }
+  }
+
+  .success-svg {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+  }
+
+  .circle {
+    stroke-dasharray: 280;
+    stroke-dashoffset: 280;
+    animation: dash 1s ease-out forwards;
+  }
+
+  .check {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    animation: dashCheck 0.8s 1s ease-out forwards;
+  }
+
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes dashCheck {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  </style>
+</head>
+
+<body>
+  
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+      <h1><a href="index.html"><span>UPI Fraud Detection</span></a></h1>
+
+      <!-- Toggler for mobile -->
+      <button class="navbar-toggler d-lg-none border-0 bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Navbar -->
+      <nav id="navbar" class="navbar navbar-expand-lg">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link scrollto" href="{{ url_for('first') }}"><i class="bi bi-house-door"></i>Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link scrollto" href="{{ url_for('login') }}"><i class="bi bi-person-circle"></i>Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link scrollto active" href="{{ url_for('upload') }}"><i class="bi bi-upload"></i>Upload</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+
+  <section id="hero">
+    <div class="hero-content-box">
+      <h1 class="hero-title">
+        UPI Fraud Detection<br>
+        Powered by MACHINE LEARNING APPROACHES
+      </h1>
+    </div>
+  
+    <button class="scroll-btn" onclick="scrollToTrain()">Start Analysis</button>
+  
+<!-- Left-Top Static Icons -->
+<div class="icon-container">
+  <div class="icon-item">
+    <div class="icon-rays"></div>
+    <div class="icon-body">
+      <div class="icon-emoji">📲</div> <!-- Mobile Payment -->
+    </div>
+  </div>
+  <div class="icon-item">
+    <div class="icon-rays"></div>
+    <div class="icon-body">
+      <div class="icon-emoji">💸</div> <!-- Money flying -->
+    </div>
+  </div>
+  <div class="icon-item">
+    <div class="icon-rays"></div>
+    <div class="icon-body">
+      <div class="icon-emoji">💳</div> <!-- Credit/Debit Card -->
+    </div>
+  </div>
+  <div class="icon-item">
+    <div class="icon-rays"></div>
+    <div class="icon-body">
+      <div class="icon-emoji">🔒</div> <!-- Lock -->
+    </div>
+  </div>
+  <div class="icon-item">
+    <div class="icon-rays"></div>
+    <div class="icon-body">
+      <div class="icon-emoji">💰</div> <!-- Money Bag -->
+    </div>
+  </div>
+</div>
+
+      </section>
+
+  <section class="preview-section" id="trainSection">
+    <div class="container">
+      <h2 class="text-center mb-4">Dataset Preview</h2>
+      <div class="row">
+        <div class="col-lg-12">
+          {{ df_view.to_html(classes="table table-striped table-hover", na_rep="-") | safe }}
+        </div>
+      </div>
+      <button onclick="startTraining()" class="btn-train">
+        <span class="train-text">Train & Validate Model</span>
+        <div id="loading" style="display:none;margin-top:10px;"></div>
+      </button>
+    </div>
+  </section>
+
+<!-- SVG Neon Modal -->
+<div class="modal fade" id="doneModal" tabindex="-1" aria-labelledby="doneModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-4">
+      <div class="modal-body text-center text-white">
+        <!-- SVG Success Animation -->
+        <svg class="success-svg" viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="45" stroke="#00ffcc" stroke-width="5" fill="none" class="circle"/>
+          <polyline points="30,55 45,70 70,40" stroke="#00ffcc" stroke-width="5" fill="none" class="check"/>
+        </svg>
+
+        <h4 class="text-success">✅ Training Successful!</h4>
+        <p class="mt-2">Redirecting to predictions...</p>
+        <div class="neon-bar"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Orbitron Font -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+
+  <a href="#" class="scroll-to-top">↑</a>
+
+  <audio id="clickSound" src="../static/audio/click.mp3" preload="auto"></audio>
+
+  <!-- JS Scripts -->
+  <script src="../static/vendor/aos/aos.js"></script>
+  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../static/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="../static/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      AOS.init({ duration: 1000, once: true });
+
+      window.addEventListener('scroll', function () {
+        const scrollBtn = document.querySelector('.scroll-to-top');
+        scrollBtn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+    });
+
+    function startTraining() {
+      document.getElementById("clickSound").play();
+      const btn = document.querySelector('.btn-train');
+      const loading = document.getElementById('loading');
+
+      btn.disabled = true;
+      loading.style.display = 'block';
+
+      setTimeout(() => {
+        loading.style.display = 'none';
+        $('#doneModal').modal('show');
+
+        setTimeout(() => {
+          window.location.href = "{{ url_for('prediction1') }}";
+        }, 2500);
+      }, 3000);
+    }
+
+    function scrollToTrain() {
+      document.getElementById('trainSection').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  </script>
+</body>
+</html>

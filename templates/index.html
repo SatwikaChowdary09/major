@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>UPI Fraud Detection</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    crossorigin="anonymous">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+  
+  <!-- Animation CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #000;
+      overflow-x: hidden;
+    }
+
+    #hero {
+      position: relative;
+      background: url('https://cdnjs.cloudflare.com/ajax/libs/placeholder-images/0.1.0/img/abstract-dark-blue.jpg') no-repeat center center/cover;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+    }
+
+    #hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 0;
+    }
+
+    .form-content {
+      background: rgba(10, 10, 10, 0.8);
+      border: 2px solid #0ff;
+      box-shadow: 0 0 20px #0ff, 0 0 30px #0ff;
+      animation: neonGlow 2s ease-in-out infinite alternate;
+      color: #fff;
+      backdrop-filter: blur(10px);
+      transition: all 0.5s ease;
+      border-radius: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    @keyframes neonGlow {
+      from {
+        box-shadow: 0 0 10px #0ff;
+      }
+
+      to {
+        box-shadow: 0 0 25px #0ff, 0 0 40px #0ff;
+      }
+    }
+
+    .form-content input,
+    .form-content select {
+      background: rgba(17, 17, 17, 0.8);
+      border: 1px solid #0ff;
+      color: #fff;
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .form-content input::placeholder,
+    .form-content select option {
+      color: #aaa;
+    }
+
+    .form-content input:focus,
+    .form-content select:focus {
+      border-color: #00f0ff;
+      box-shadow: 0 0 10px #00f0ff;
+      outline: none;
+    }
+
+    .btn-primary {
+      background-color: #00f0ff;
+      border: none;
+      transition: 0.3s ease;
+      font-weight: 600;
+      box-shadow: 0 0 10px #00f0ff;
+      color: #000;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .btn-primary:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+      transition: 0.5s;
+      z-index: -1;
+    }
+
+    .btn-primary:hover:before {
+      left: 100%;
+    }
+
+    .btn-primary:hover {
+      background-color: #00c7d9;
+      box-shadow: 0 0 20px #00f0ff;
+      transform: scale(1.05);
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff;
+      letter-spacing: 2px;
+    }
+
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.85);
+      padding: 15px 0;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 240, 255, 0.3);
+      display: flex;
+      justify-content: center;
+    }
+
+    .navbar-nav {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .nav-item {
+      margin: 0 10px;
+    }
+
+    .nav-link {
+      color: #0ff !important;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 8px 15px;
+      border-radius: 5px;
+      border: 1px solid transparent;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #fff !important;
+      background: rgba(0, 255, 255, 0.2);
+      border: 1px solid #0ff;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+    
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+    
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .typewriter h2 {
+      overflow: hidden;
+      border-right: .15em solid #0ff;
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: .15em;
+      animation: 
+        typing 3.5s steps(40, end),
+        blink-caret .75s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #0ff; }
+    }
+    
+    .form-label {
+      color: #0ff;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    
+    .input-group {
+      position: relative;
+    }
+    
+    .input-icon {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      color: #0ff;
+      z-index: 10;
+    }
+    
+    .card-security {
+      position: relative;
+      margin-top: 30px;
+    }
+    
+    .security-icon {
+      position: absolute;
+      top: -20px;
+      right: 20px;
+      font-size: 2rem;
+      color: #0ff;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .cybersecurity-badge {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid #0ff;
+      padding: 10px;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 0 10px #0ff;
+      z-index: 2;
+    }
+    
+    .badge-icon {
+      font-size: 1.5rem;
+      color: #0ff;
+    }
+
+    .logo {
+      color: #0ff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      text-shadow: 0 0 10px #0ff;
+      letter-spacing: 2px;
+      margin-right: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="logo mr-auto" href="#">UPI Fraud Detection</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+          <span class="navbar-toggler-icon"><i class="bi bi-list" style="color:#0ff;font-size:24px;"></i></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/upload">Upload</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Check</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/chart">Analysis</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <div class="form-content p-4 rounded animate__animated animate__fadeInUp">
+            <div class="heading text-center mb-3">
+              <div class="typewriter">
+                <h2 class="mb-3"><i class="bi bi-shield-lock-fill floating"></i> UPI Fraud Detection</h2>
+              </div>
+              <p class="text-light">Secure your transactions with AI-powered fraud detection</p>
+            </div>
+            <form class="row" action="/detect" method="post">
+              <div class="col-md-12 mb-3">
+                <div class="input-group">
+                  <label class="form-label w-100">UPI Number</label>
+                  <input type="number" name="card_number" class="form-control" placeholder="Enter UPI number" required />
+                  <div class="input-icon">
+                    <i class="bi bi-credit-card"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="input-group">
+                  <label class="form-label w-100">Holder Name</label>
+                  <input type="text" name="card_holder_name" class="form-control" placeholder="UPI holder name" />
+                  <div class="input-icon">
+                    <i class="bi bi-person"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="input-group">
+                  <label class="form-label w-100">Date of Birth</label>
+                  <input type="text" name="dob" class="form-control" placeholder="Enter date of Birth" onfocus="(this.type='date')" required />
+                  <div class="input-icon">
+                    <i class="bi bi-calendar"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label w-100">State</label>
+                <select name="state" class="form-control" required>
+                  <option value="0">Andhra Pradesh</option>
+                        <option value="1">Arunachal Pradesh</option>
+                        <option value="2">Assam</option>
+                        <option value="3">Bihar</option>
+                        <option value="4">Chhattisgarh</option>
+                        <option value="5">Goa</option>
+                        <option value="6">Gujarat</option>
+                        <option value="7">Haryana</option>
+                        <option value="8">Jharkhand</option>
+                        <option value="9">Himachal Pradesh</option>
+                        <option value="10">Karnataka</option>
+                        <option value="11">Kerala</option>
+                        <option value="12">Madhya Pradesh</option>
+                        <option value="13">Maharashtra</option>
+                        <option value="14">Manipur</option>
+                        <option value="15">Meghalaya</option>
+                        <option value="16">Mizoram</option>
+                        <option value="17">Nagaland</option>
+                        <option value="18">Odisha</option>
+                        <option value="19">Punjab</option>
+                        <option value="20">Rajasthan</option>
+                        <option value="21">Sikkim</option>
+                        <option value="22">Tamil Nadu</option>
+                        <option value="23">Telangana</option>
+                        <option value="24">Tripura</option>
+                        <option value="25">Uttar Pradesh</option>
+                        <option value="26">Uttarakhand</option>
+                        <option value="27">West Bengal</option>
+                        <option value="28">Andaman and Nicobar Islands</option>
+                        <option value="29">Chandigarh</option>
+                        <option value="30">Dadra and Nagar Haveli and Daman and Diu</option>
+                        <option value="31">Delhi</option>
+                        <option value="32">Jammu and Kashmir</option>
+                        <option value="33">Ladakh</option>
+                        <option value="34">New York</option>
+                        <option value="35">Lakshadweep</option>
+                        <option value="36">Puducherry</option>
+                        <option value="37">Oregon</option>
+                        <option value="38">Pennsylvania</option>
+                        <option value="39">Rhode Island</option>
+                        <option value="40">London</option>
+                        <option value="41">South Dacota</option>
+                        <option value="42">Tennessee</option>
+                        <option value="43">Texas</option>
+                        <option value="44">Utah</option>
+                        <option value="45">Virginia</option>
+                        <option value="46">Singapore</option>
+                        <option value="47">Washington</option>
+                        <option value="48">New York</option>
+                        <option value="49">West Virginia</option>
+                        <option value="50">Maldives</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="input-group">
+                  <label class="form-label w-100">PIN Code</label>
+                  <input type="number" name="zip" class="form-control" placeholder="Enter pin code" required />
+                  <div class="input-icon">
+                    <i class="bi bi-geo-alt"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="input-group">
+                  <label class="form-label w-100">Transaction Date & Time</label>
+                  <input type="text" name="trans_datetime" class="form-control" placeholder="Enter date and time" onfocus="(this.type='datetime-local')" required />
+                  <div class="input-icon">
+                    <i class="bi bi-clock"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="input-group">
+                  <label class="form-label w-100">Amount (Rs)</label>
+                  <input type="number" name="trans_amount" class="form-control" placeholder="Enter amount (Rs)" required />
+                  <div class="input-icon">
+                    <i class="bi bi-currency-rupee"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <div class="input-group">
+                  <label class="form-label w-100">Seller Name</label>
+                  <input type="text" name="merchant" class="form-control" placeholder="Enter Seller name" />
+                  <div class="input-icon">
+                    <i class="bi bi-shop"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label w-100">Merchant Category</label>
+                <select name="category" class="form-control" required>
+                  <option selected disabled value="">Select merchant category</option>
+                  <option value="0">Entertainment</option>
+                        <option value="1">Food Dining</option>
+                        <option value="2">Gas Transport</option>
+                        <option value="3">Grocery NET</option>
+                        <option value="4">Grocery POS</option>
+                        <option value="5">Health Fitness</option>
+                        <option value="6">Home</option>
+                        <option value="7">Kids Pets</option>
+                        <option value="8">Miscellaneous NET</option>
+                        <option value="9">Miscellaneous POS</option>
+                        <option value="10">Personal Care</option>
+                        <option value="11">Shopping NET</option>
+                        <option value="12">Shopping POS</option>
+                        <option value="13">Travel</option>
+                </select>
+              </div>
+              <div class="col text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  <i class="bi bi-shield-check"></i> Scan Transaction
+                </button>
+              </div>
+            </form>
+            
+            <div class="card-security">
+              <div class="security-icon">
+                <i class="bi bi-fingerprint"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="cybersecurity-badge animate__animated animate__fadeInRight">
+      <div class="badge-icon">
+        <i class="bi bi-shield-check"></i>
+      </div>
+      <div>
+        Enhanced with AI Security<br>
+        <small>256-bit encryption protected</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- JS Scripts -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    crossorigin="anonymous"></script>
+  
+  <script>
+    // Add form animation effects
+    document.addEventListener('DOMContentLoaded', function() {
+      const inputs = document.querySelectorAll('input, select');
+      
+      inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+          this.parentElement.classList.add('animate__animated', 'animate__pulse');
+        });
+        
+        input.addEventListener('blur', function() {
+          this.parentElement.classList.remove('animate__animated', 'animate__pulse');
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>

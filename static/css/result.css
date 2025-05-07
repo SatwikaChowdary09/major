@@ -1,0 +1,340 @@
+:root {
+    --primary-neon: #0ff;
+    --secondary-neon: #f0f;
+    --glow-color: rgba(0, 255, 255, 0.7);
+}
+
+body {
+    background: #0f0c29;
+    background: linear-gradient(135deg, #24243e, #302b63, #0f0c29);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    animation: gradientShift 15s ease infinite;
+    background-size: 400% 400%;
+    color: white;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.heading {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 600;
+    padding: 2rem;
+    border-radius: 15px 15px 0 0;
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 0 10px var(--primary-neon), 0 0 20px var(--primary-neon);
+    letter-spacing: 3px;
+    border-top: 2px solid var(--primary-neon);
+    border-left: 2px solid var(--primary-neon);
+    border-right: 2px solid var(--primary-neon);
+}
+
+.heading p {
+    margin: 0;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { text-shadow: 0 0 5px var(--primary-neon), 0 0 10px var(--primary-neon); }
+    50% { text-shadow: 0 0 20px var(--primary-neon), 0 0 30px var(--primary-neon); }
+    100% { text-shadow: 0 0 5px var(--primary-neon), 0 0 10px var(--primary-neon); }
+}
+
+.heading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--primary-neon), transparent);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.form-content {
+    padding: 4rem 10%;
+    margin: 0 auto 3rem;
+    max-width: 900px;
+    border: none;
+    background-color: rgba(10, 10, 30, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 
+                0 0 20px var(--glow-color), 
+                inset 0 0 10px rgba(0, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-bottom: 2px solid var(--primary-neon);
+    border-left: 2px solid var(--primary-neon);
+    border-right: 2px solid var(--primary-neon);
+}
+
+.form-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 30px var(--glow-color);
+}
+
+.form-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--primary-neon), var(--secondary-neon));
+}
+
+#btn {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.btnSubmit {
+    margin: 1.5rem;
+    border: none;
+    border-radius: 50px;
+    padding: 1rem 2rem;
+    width: 200px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 10px var(--glow-color);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--primary-neon);
+    text-shadow: 0 0 5px var(--primary-neon);
+}
+
+.btnSubmit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6), 0 0 20px var(--glow-color);
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--primary-neon);
+}
+
+.btnSubmit:active {
+    transform: translateY(1px);
+}
+
+.btnSubmit::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0, 255, 255, 0.1), rgba(0, 255, 255, 0.3));
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+}
+
+.btnSubmit:hover::after {
+    transform: translateX(100%);
+}
+
+#output {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 2rem 0 4rem;
+    color: white;
+    animation: fadeIn 1s ease, glow 2s ease-in-out infinite alternate;
+    text-shadow: 0 0 5px var(--primary-neon);
+    padding: 20px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px var(--primary-neon), 0 0 10px var(--primary-neon); }
+    to { text-shadow: 0 0 10px var(--primary-neon), 0 0 20px var(--primary-neon), 0 0 30px var(--primary-neon); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    animation: slideIn 0.6s ease forwards;
+    opacity: 0;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+
+/* New Features */
+.status-indicator {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: var(--primary-neon);
+    box-shadow: 0 0 10px var(--primary-neon), 0 0 20px var(--primary-neon);
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+.scanner {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--primary-neon), transparent);
+    top: 0;
+    left: 0;
+    box-shadow: 0 0 8px var(--primary-neon);
+    animation: scan 3s linear infinite;
+}
+
+@keyframes scan {
+    0% { top: 0; }
+    100% { top: 100%; }
+}
+
+.corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: var(--primary-neon);
+    border-style: solid;
+    border-width: 0;
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.corner-top-left {
+    top: 10px;
+    left: 10px;
+    border-top-width: 2px;
+    border-left-width: 2px;
+}
+
+.corner-top-right {
+    top: 10px;
+    right: 10px;
+    border-top-width: 2px;
+    border-right-width: 2px;
+}
+
+.corner-bottom-left {
+    bottom: 10px;
+    left: 10px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+}
+
+.corner-bottom-right {
+    bottom: 10px;
+    right: 10px;
+    border-bottom-width: 2px;
+    border-right-width: 2px;
+}
+
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background-color: rgba(0, 255, 255, 0.7);
+    border-radius: 50%;
+    animation: particleMove 20s linear infinite;
+}
+
+@keyframes particleMove {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) translateX(100vw);
+        opacity: 0;
+    }
+}
+
+.timestamp {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: monospace;
+}
+
+.detection-type {
+    display: inline-block;
+    padding: 5px 15px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    border: 1px solid var(--primary-neon);
+    color: var(--primary-neon);
+    animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
